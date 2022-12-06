@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/_head.html::head"></th:block>
+</head>
+
+<body>
+
+<section id="container" >
+    <section id="main-content">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> To-Do Lists</h3>
+
+            <!-- COMPLEX TO DO LIST -->
+            <div class="row mt">
+                <div class="col-md-12">
+                    <section class="task-panel tasks-widget">
+                        <div class="panel-heading">
+                            <div class="pull-left"><h5><i class="fa fa-tasks"></i> Welcom to our Todo List </h5></div>
+                            <br>
+                        </div>
+                        <div class="panel-body">
+                            <div class="task-content">
+                                <form th:action="@{/rechercherlist}"  th:method="post">
+                                    <input  placeholder="recherhcher une tache" type="text" name="title"><input type="submit" value="Rechercher">
+                                </form>
+                                <ul class="task-list" th:each="todo :${todo}">
+                                    <li>
+                                        <div class="task-checkbox">
+                                            <input type="checkbox" class="list-child" value=""  />
+                                        </div>
+
+                                        <div class="task-title" >
+                                            <span class="task-title-sp"th:if="${todo.title}"></span>
+                                            <span class="task-title-sp"th:text="${todo.title}"></span>
+                                            <span class="badge bg-theme" th:text="${todo.status}"></span>
+                                            <span class="task-title-sp" th:text="${todo.content}"></span>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <div class=" add-task-row">
+                                <a class="btn btn-success btn-sm pull-left" th:href="@{/enregistrerlistform}">Add New Tasks</a>
+                            </div>
+                        </div>
+                    </section>
+                </div><!-- /col-md-12-->
+            </div><!-- /row -->
+
+
+        </section><! --/wrapper -->
+    </section><!-- /MAIN CONTENT -->
+
+    <!--main content end-->
+    <!--footer start-->
+    <!--footer end-->
+</section>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<th:block th:replace="fragments/_js.html::js"></th:block>
+
+<script>
+      jQuery(document).ready(function() {
+          TaskList.initTaskWidget();
+      });
+
+      $(function() {
+          $( "#sortable" ).sortable();
+          $( "#sortable" ).disableSelection();
+      });
+
+    </script>
+
+
+<script>
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
+  </script>
+
+</body>
+</html>

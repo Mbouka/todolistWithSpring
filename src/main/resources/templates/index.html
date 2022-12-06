@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <th:block th:replace="fragments/_head.html::head"></th:block>
+</head>
+
+<body>
+
+
+ <!-- ======= Hero Section ======= -->
+ <section id="hero" class="d-flex align-items-center">
+  <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
+    <h1>Bienvenu sur notre annuaire pour acte de naissance!!!</h1>
+    <h2>Notre équipe a conçu ce site uniquement pour satifaire vos requêtes</h2>
+    <a  th:href="@{liste}" class="btn-get-started scrollto">Allons-y</a>
+    <a  th:href="@{enregistrerlistform}" class="btn-get-started scrollto">Allony</a>
+
+  </div>
+</section><!-- End Hero -->
+
+
+
+<!-- ======= Footer ======= -->
+
+ <th:block th:replace="fragments/_js.html::js"></th:block>
+
+</body>
+
+</html>
