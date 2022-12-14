@@ -53,7 +53,11 @@ public class TodoListService implements ITodoList{
     }
 
     @Override
-    public Optional<List<Todolist>> searchTodoListByTitle(String title) {
-        return todoListRespository.findToDoListByTitle(title);
+    public List<Todolist> searchTodoListByTitle(String title) {
+        return todoListRespository.findTodoListByTitle(title).get();
+    }
+    @Override
+    public long countTask() {
+        return todoListRespository.count();
     }
 }

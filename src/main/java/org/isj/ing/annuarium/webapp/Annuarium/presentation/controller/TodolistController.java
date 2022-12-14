@@ -22,14 +22,29 @@ public class TodolistController {
 
     @GetMapping("/")
     public String pageAccueil(Model model) {
-        System.out.println("helllo");
-        return "redirect:enregistrer";
+        return "redirect:liste";
     }
 
+
     @GetMapping("/liste")
-    public  String pageliste (Model model){
+    public  String pageliste (Model model,String msg ){
+        int tabSize;
+        long num= iTodoList.countTask();
+        long numTask = num;
+        System.out.println(numTask);
+        model.addAttribute("numTask",numTask);
+
         List<Todolist> todo = iTodoList.listTodo();
+        tabSize=todo.size();
         model.addAttribute("todo",todo);
+
+        msg="You have no task for the moment";
+        if(tabSize == 0){
+            System.out.println(msg);
+            model.addAttribute("msg",msg);
+        }else{
+            model.addAttribute("msg", "");
+        }
         return "todolist";
     }
 
@@ -46,23 +61,30 @@ public class TodolistController {
         model.addAttribute("todo",todo);
         return "redirect:liste";
     }
-    @PostMapping("/rechercherlist" )
-    public String rechercherTodoList( @RequestParam(name = "title") String title,
-                                   Model model) {
-        Optional<List<Todolist>> todo=  iTodoList.searchTodoListByTitle(title);
+    @GetMapping("/rechercherlist" )
+    public String rechercherTodoList( @RequestParam(name = "title") String title, Model model,String msg) {
+        int tabSize;
+        List<Todolist> todo=  iTodoList.searchTodoListByTitle(title);
+        tabSize=todo.size();
         model.addAttribute("todo",todo);
-        return "todolist";
+        msg="no task of this name";
+        if(tabSize == 0){
+            System.out.println(msg);
+            model.addAttribute("msg",msg);
+        }else{
+            model.addAttribute("msg", "");
+        }
+        return "rechercher";
     }
+
     @GetMapping("/rechercherlistform")
     public String pagerechercherform(Model model) {
-        List<Todolist> todo = iTodoList.listTodo();
-        model.addAttribute("todo",todo);
-        return "todolist";
+
+        return "rechercher";
     }
 
     @GetMapping("/enregistrerlistform")
     public String enregistrerListForm( Model model) {
-        System.out.println("je passe ici");
         Todolist todolist=  new Todolist();
         model.addAttribute("todolist",todolist);
         return "enregistrer";

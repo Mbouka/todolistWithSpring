@@ -38,15 +38,17 @@ public class TodolistRestController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<?>getTodo(@PathVariable Long  id){
-        Optional<Todolist> todo=iTodoList.findToDoListById(id);
-        return new ResponseEntity<> (todo, HttpStatus.NOT_FOUND);
+    public ResponseEntity<?>getTodo(@PathVariable Long id){
+        return ResponseEntity.ok(iTodoList.findToDoListById(id));
     }
 
     @GetMapping("/search/{title}")
-    public ResponseEntity<?>getTodoByTitle(@PathVariable String  title){
-        Optional<List<Todolist>> todolistList=iTodoList.searchTodoListByTitle(title);
-        return  new ResponseEntity<>(todolistList,HttpStatus.NOT_FOUND);
+    public ResponseEntity<List<Todolist>>getTodoByTitle(@PathVariable String title){
+        return  ResponseEntity.ok(iTodoList.searchTodoListByTitle(title));
+    }
+    @GetMapping("/count")
+    public long countTask(){
+        return iTodoList.countTask();
     }
 
 }

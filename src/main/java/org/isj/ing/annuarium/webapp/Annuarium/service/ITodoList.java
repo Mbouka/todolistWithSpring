@@ -11,5 +11,6 @@ public interface ITodoList {
     List<Todolist> listTodo();
     String deleteTodo(Long id);
     Optional<Todolist> findToDoListById(Long id);
-    Optional<List<Todolist>> searchTodoListByTitle(String title);
+    List<Todolist> searchTodoListByTitle(String title);
+    long countTask();
 }

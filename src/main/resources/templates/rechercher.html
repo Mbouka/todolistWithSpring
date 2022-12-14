@@ -16,29 +16,33 @@
                 <div class="col-md-12">
                     <section class="task-panel tasks-widget">
                         <div class="panel-heading">
-                            <div class="pull-left"><h5><i class="fa fa-tasks"></i> Welcom to our Todo List </h5></div>
+                            <div class="pull-left"><h5><i class="fa fa-tasks"></i>Find a Task!</h5></div>
                             <br>
                         </div>
                         <div class="panel-body">
                             <div class="task-content">
-                                <form th:action="@{/rechercherlist}"  th:method="post">
+                                <form th:action="@{/rechercherlist}"  th:method="get">
                                     <input  placeholder="recherhcher une tache" type="text" name="title"><input type="submit" value="Rechercher">
                                 </form>
-                                <ul class="task-list" th:each="todo :${todo}">
-                                    <li>
-                                        <div class="task-checkbox">
-                                            <input type="checkbox" class="list-child" value=""  />
-                                        </div>
+                                <span class="task-title-sp"th:text="${msg}"></span>
 
-                                        <div class="task-title" >
-                                            <span class="task-title-sp"th:if="${todo.title}"></span>
-                                            <span class="task-title-sp"th:text="${todo.title}"></span>
-                                            <span class="badge bg-theme" th:text="${todo.status}"></span>
-                                            <span class="task-title-sp" th:text="${todo.content}"></span>
-                                        </div>
-                                    </li>
+                                <div th:each="todo :${todo}">
+                                    <ul class="task-list" >
+                                        <li>
+                                            <div class="task-checkbox">
+                                                <input type="checkbox" class="list-child" value=""  />
+                                            </div>
 
-                                </ul>
+                                            <div class="task-title" >
+                                                <span class="task-title-sp"th:text="${todo.title}"></span>
+                                                <span class="badge bg-theme" th:text="${todo.status}"></span>
+                                                <a th:href="@{'/supprimer?id=' + ${todo.id}}" >delete</a>
+
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
                             </div>
 
                             <div class=" add-task-row">
